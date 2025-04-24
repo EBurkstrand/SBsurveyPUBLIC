@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}survey{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <form class="pure-form pure-form-aligned"  action="/record" method="post">
+            <fieldset>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="ThisIsName" minlength="3" required><br>
+            </fieldset>
+                
+            <fieldset>
+                <legend>Select your favorite defense:</legend>
+                <label for="Split" class="pure-radio">
+                    <input type="radio" id="Split" name="fav" value="Split">Split
+                </label>
+                <label for="Push-Pull" class="pure-radio">
+                    <input type="radio" id="Push-Pull" name="fav" value="Push-Pull">Push-Pull
+                </label>
+                <label for="What is defense?" class="pure-radio">
+                    <input type="radio" id="What is defense?" name="fav" value="What is defense?">What is defense?
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <label for="length">Pick a game length</label>
+                <select name="length" id="length">
+                    <option value="15">15</option>
+                    <option value="21">21</option>
+                    <option value="25">25</option>
+                </select>
+            </fieldset>
+
+
+            <fieldset>
+                <label for="solo" class="pure-checkbox">
+                    Check box if you are a competitive player: <input type="checkbox" id="showTextarea" name="solo">
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <div id="conditionalTextarea1">
+                    <label for="conditionalTextarea">What skill level are you?</label><br>
+                    <input type="text" id="conditionalTextarea" name="sometimes" rows="4" cols="50"></textarea>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <input type="submit" value="Next">
+            </fieldset>
+            
+        </form>
+    </div>
+    <script>
+        $('#showTextarea').change(function() {
+            if ($(this).is(':checked')) {
+                $('#conditionalTextarea1').show();
+            } else {
+                $('#conditionalTextarea1').hide();
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,51 @@
+html {
+    justify-content: center;
+    background-color: lightsalmon;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box {
+    border-radius: 1.5em;
+    padding: 3em;
+    background-color: bisque;
+    margin-top: 3em;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+a {
+    padding: 5%;
+}
+
+#conditionalTextarea1 {
+    display: none;
+}
+
+#header{
+    background-color: bisque;
+    text-align: center;
+}
+
+.bigbox {
+    justify-content: left;
+}
+
+h3 {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.textEdit{
+    text-decoration: underline;
+    font-weight: bold;
+}

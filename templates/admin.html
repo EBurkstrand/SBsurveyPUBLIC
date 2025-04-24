@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}decline{% endblock %}
+
+{% block content %}
+    <div class="bigbox">
+        <div class="box">
+            <label class="textEdit">Names</label>
+            {% for x in names -%}
+            <pre>{{x}}</pre>
+            {% endfor %}
+        </div>  
+        <div class="box">
+            <label class="textEdit">Skill Levels</label>
+            {% for x in text -%}
+            <pre>{{x}}</pre>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    
+    <div class="box">
+        <label class="textEdit">Preferred Defenses</label>
+        <canvas id="Defense-chart"></canvas>
+    </div>
+    <div class="box">
+        <label class="textEdit">Preferred Game Lengths</label>
+        <canvas id="length-chart"></canvas>
+    </div>
+    <div class="box">
+        <label class="textEdit">Competitive vs Non-Competitive</label>
+        <canvas id="competitive-chart"></canvas>
+    </div>
+
+    <script>
+        const labels = ['Split', 'Push-Pull', 'What is defense?'];
+        const defe = {{defense | tojson}};
+        function countOccurrences(arr, val) {
+            return arr.reduce((acc, element) => (element === val ? acc + 1 : acc), 0);
+        }
+
+        const dataValues = labels.map(labels => countOccurrences(defe, labels));
+
+        const ctx = document.getElementById('Defense-chart').getContext('2d');
+        const myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Label Occurrences',
+                    data: dataValues,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+        
+        const labels2 = ['15', '21', '25'];
+        const lengths = {{length | tojson}};
+        const dataValues2 = labels2.map(labels2 => countOccurrences(lengths, labels2));
+        const ctx2 = document.getElementById('length-chart').getContext('2d');
+
+        const myBarChart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: labels2,
+                datasets: [{
+                    label: 'Label Occurrences',
+                    data: dataValues2,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,  
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+
+        const labels3 = [true, false];
+        const labelsShow = ['Competive Player', 'Casual Player']
+        const checks = {{check | tojson}};
+        const dataValues3 = labels3.map(labels3 => countOccurrences(checks, labels3));
+        const ctx3 = document.getElementById('competitive-chart').getContext('2d');
+
+        const myBarChart3 = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: labelsShow,
+                datasets: [{
+                    label: 'Label Occurrences',
+                    data: dataValues3,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,  
+                        ticks: {
+                            stepSize: 1, 
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+{% endblock %}
